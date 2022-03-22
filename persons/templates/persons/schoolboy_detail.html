@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Информация об ученике {{ user.get_full_name }}{% endblock %}
+
+{% block content %}
+    <h1>Информация об ученике </h1>
+    <div class="persons-info ">
+        <div class="persons-photo-block">
+            <img class="user-avatar" src="{{ user.photo.url }}" alt="{{ user.get_full_name }}">
+        </div>
+
+        <div class="persons-info-block">
+            <h3>{{ user.get_full_name }}</h3>
+            <p><i><u>Дата рождения:</u></i> {{ user.birth_date|date:"d.m.Y" }}</p>
+            <p><i><u>Класс:</u></i> {{ user.schoolboy.group.grade }}</p>
+            <span class="small-font">Характеристика</span><hr>
+            <p>{{ user.description }}</p>
+
+            {% include "persons/inclusions/persons_contact_info.html" %}
+
+        </div>
+    </div>
+{% endblock %}

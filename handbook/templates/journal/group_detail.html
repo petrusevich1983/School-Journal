@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Журнал класс {{ group.grade }} {% endblock %}
+
+{% block content %}
+    <h1>Классный журнал - {{ group.grade }}</h1>
+
+    <h2>Предметы {{ group.grade }} класса</h2>
+    <table class="table-journal">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Предмет</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lesson in group.grade.lessons.all %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'score_lesson' group.id lesson.id %}"> {{ lesson }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Список учеников {{ group.grade }} класса</h2>
+    <a class="btn btn-success" href="{% url 'schoolboy_add' %}">+ Добавить ученика</a>
+    <table class="table-journal">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Фото</th>
+                <th>ФИО</th>
+                <th>Дата рождения</th>
+                <th>Характеристика</th>
+                <th>Редактировать</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schoolboy in schoolboys %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{{ schoolboy.schoolboy.get_absolute_url }}">
+                            <img class="user-avatar-mini" src="{{ schoolboy.photo.url }}" alt="{{ schoolboy.get_full_name }}">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ schoolboy.schoolboy.get_absolute_url }}">
+                            {{ schoolboy.get_full_name }}
+                        </a>
+                    </td>
+                    <td>{{ schoolboy.birth_date|date:'d.m.Y' }}</td>
+                    <td>{{ schoolboy.description }}</td>
+                    <td>
+                        <a class="btn btn-dark" href="{% url 'schoolboy_update' schoolboy.id %}">Редактировать</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
