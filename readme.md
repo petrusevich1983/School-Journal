@@ -9,7 +9,7 @@
 
 **Онлайн дневник ученика** - позволяет контролировать успеваемость ученика, видеть статистику успеваемости.
 
-![img_1](my project.png)
+![img_1](https://raw.githubusercontent.com/petrusevich1983/School-Journal/master/my%20project.png)
 ***
 
 ### Инструменты разработки
